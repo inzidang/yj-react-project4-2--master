@@ -4,6 +4,7 @@ import SearchAsset from "./asset/SearchAsset";
 import useUser from "../hooks/useUser";
 import { logout } from "../api";
 
+
 const GNB = [
     { mainTitle: "공연안내", subTitle: "Performance", link: "./information" },
     { mainTitle: "공연 대관안내", subTitle: "Rental", link: "./rental" },
@@ -16,10 +17,12 @@ export default function Header() {
     const { userLoading, isLoggedIn, user, refetch } = useUser();
     const onLogout = async () => {
         await logout();
+        alert("로그아웃");
         refetch();
     };
 
     console.log(userLoading, isLoggedIn, user);
+
     return (
         <div className="w-full flex justify-center h-header-height shadow-md">
             {/* 좌우 여백을 위한 박스 */}
@@ -53,6 +56,9 @@ export default function Header() {
                         {isLoggedIn === "true" ? (
                             <>
                                 <div>{user.email}</div>
+                                <div className="w-8 h-8 rounded-full bg-slate-900 overflow-hidden">
+                                    <img src={user.avatar} alt="profile"/>
+                                </div>
                                 <div onClick={onLogout}>logout</div>
                             </>
                         ) : (

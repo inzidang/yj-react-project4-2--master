@@ -80,3 +80,14 @@ export async function logout() {
         credentials: "include",
     }).then((res) => res.json());
 }
+
+export async function kakaoLogin(code) {
+    return await fetch(`${BASE_PATH}/api/users/kakao`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        credentials: "include",
+        body:JSON.stringify({ code })
+    }).then((res) => res.json());
+}
